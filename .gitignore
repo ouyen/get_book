@@ -1,0 +1,6 @@
+tmp/
+*.pdf
+logs/
+config.yaml
+*.log
+*.ipynb
