@@ -31,6 +31,10 @@ import yaml
 def get_page(args):
     page_url,now_page_num=args
     # pic=requests.get(page_url,proxies=my_proxies,timeout=5)
+    # if already exists pass
+    if os.path.exists("temp/"+str(now_page_num)+'.png'):
+        print(str(now_page_num)+'already exists')
+        return
     pic=requests.get(page_url,timeout=5)
     with open("temp/"+str(now_page_num)+'.png','wb') as f:
         f.write(pic.content)
@@ -150,7 +154,10 @@ def download_by_details(details):
     y_or_n=input()
     if(y_or_n!='n'):
         
-        os.makedirs("temp")
+        # os.makedirs("temp")
+        # make tmp dir if not exist
+        if not os.path.exists("temp"):
+            os.makedirs("temp")
         print("downloading pictures")
 
         parallel_download(page_num,t_url)
@@ -236,6 +243,3 @@ if __name__ == "__main__":
             driver.quit()     
         except:
             print('driver already quit')
-
-
-
